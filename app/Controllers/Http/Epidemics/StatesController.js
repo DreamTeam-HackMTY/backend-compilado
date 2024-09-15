@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const State_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Epidemic/State"));
 class StatesController {
     constructor() {
-        this.states = State_1.default.query().orderBy('id', 'desc');
+        this.states = State_1.default.query().where({ active: true }).orderBy('id', 'desc');
     }
     async index({ request, response }) {
         const { disease_id } = request.qs();

@@ -10,6 +10,7 @@ const Case_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Epidemi
 class CasesController {
     constructor() {
         this.cases = Case_1.default.query()
+            .where({ active: true })
             .preload('disease')
             .preload('state')
             .orderBy('created_at', 'desc');

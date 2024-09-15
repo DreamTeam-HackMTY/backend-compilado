@@ -14,7 +14,10 @@ const UpdateUserValidator_1 = __importDefault(global[Symbol.for('ioc.use')]("App
 const Sanitizer_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Services/Sanitizer"));
 class UsersController {
     constructor() {
-        this.users = User_1.default.query().preload('roles').orderBy('id', 'desc');
+        this.users = User_1.default.query()
+            .where({ active: true })
+            .preload('roles')
+            .orderBy('id', 'desc');
     }
     async index({ response }) {
         return response.ok({

@@ -10,7 +10,10 @@ const Disease_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Epid
 const Database_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Lucid/Database"));
 class DiseasesController {
     constructor() {
-        this.diseases = Disease_1.default.query().preload('cases').orderBy('id', 'desc');
+        this.diseases = Disease_1.default.query()
+            .where({ active: true })
+            .preload('cases')
+            .orderBy('id', 'desc');
     }
     async index({ response }) {
         const diseasesList = await this.diseases;
