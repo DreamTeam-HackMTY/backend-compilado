@@ -8,7 +8,7 @@ const Role_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Users/R
 const User_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Users/User"));
 class default_1 extends Seeder_1.default {
     async run() {
-        const [DEV, ADMIN] = await Role_1.default.createMany([
+        const [DEV, ADMIN, ESPECIALISTA, INVITADO] = await Role_1.default.createMany([
             {
                 name: 'DEV',
                 active: true,
@@ -26,7 +26,7 @@ class default_1 extends Seeder_1.default {
                 active: true,
             },
         ]);
-        const [dev, admin] = await User_1.default.createMany([
+        const [dev, admin, especialista, guest] = await User_1.default.createMany([
             {
                 email: 'dev@example.com',
                 username: 'dev',
@@ -39,9 +39,23 @@ class default_1 extends Seeder_1.default {
                 password: 'admin.pass',
                 active: true,
             },
+            {
+                email: 'especialista@example.com',
+                username: 'especialista',
+                password: 'especialista.pass',
+                active: true,
+            },
+            {
+                email: 'guest@example.com',
+                username: 'guest',
+                password: 'guest.pass',
+                active: true,
+            },
         ]);
         await dev.related('roles').attach([DEV.id]);
         await admin.related('roles').attach([ADMIN.id]);
+        await especialista.related('roles').attach([ESPECIALISTA.id]);
+        await guest.related('roles').attach([INVITADO.id]);
     }
 }
 exports.default = default_1;
