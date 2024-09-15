@@ -33,7 +33,8 @@ __decorate([
 __decorate([
     (0, Orm_1.hasMany)(() => Case_1.default, {
         localKey: 'id',
-        foreignKey: 'case_id',
+        foreignKey: 'state_id',
+        onQuery: (query) => query.preload('disease'),
     }),
     __metadata("design:type", Object)
 ], State.prototype, "cases", void 0);
