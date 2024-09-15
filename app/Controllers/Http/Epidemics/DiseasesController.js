@@ -16,8 +16,10 @@ class DiseasesController {
         const diseasesList = await this.diseases;
         const result = diseasesList
             .map((disease) => {
-            const totalCases = disease.cases.length;
-            const deaths = disease.cases.filter((c) => c.is_deaths).length;
+            const totalCases = disease.cases.reduce((sum, c) => sum + c.quantity, 0);
+            const deaths = disease.cases
+                .filter((c) => c.is_deaths)
+                .reduce((sum, c) => sum + c.quantity, 0);
             return {
                 ...disease.toJSON(),
                 total_cases: totalCases,
@@ -43,8 +45,10 @@ class DiseasesController {
                 data: null,
             });
         }
-        const totalCases = disease.cases.length;
-        const deaths = disease.cases.filter((c) => c.is_deaths).length;
+        const totalCases = disease.cases.reduce((sum, c) => sum + c.quantity, 0);
+        const deaths = disease.cases
+            .filter((c) => c.is_deaths)
+            .reduce((sum, c) => sum + c.quantity, 0);
         const { cases, ...disease_data } = disease.toJSON();
         return response.ok({
             status: 'Éxito',
