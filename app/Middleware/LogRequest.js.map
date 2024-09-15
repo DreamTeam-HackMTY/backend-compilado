@@ -1,0 +1,1 @@
+{"version":3,"file":"LogRequest.js","sourceRoot":"","sources":["../../../app/Middleware/LogRequest.ts"],"names":[],"mappings":";;AAEA,MAAqB,UAAU;IACtB,KAAK,CAAC,MAAM,CACjB,EAAE,OAAO,EAAE,MAAM,EAAuB,EACxC,IAAyB;QAEzB,MAAM,CAAC,IAAI,CAAC,GAAG,OAAO,CAAC,MAAM,EAAE,OAAO,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAA;QAEtD,MAAM,IAAI,EAAE,CAAA;IACd,CAAC;CACF;AATD,6BASC"}
