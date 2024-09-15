@@ -13,10 +13,25 @@ class DiseasesController {
         this.diseases = Disease_1.default.query().preload('cases').orderBy('id', 'desc');
     }
     async index({ response }) {
+        const diseasesList = await this.diseases;
+        const result = diseasesList
+            .map((disease) => {
+            const totalCases = disease.cases.length;
+            const deaths = disease.cases.filter((c) => c.is_deaths).length;
+            return {
+                ...disease.toJSON(),
+                total_cases: totalCases,
+                deaths: deaths,
+            };
+        })
+            .map((disease) => {
+            delete disease.cases;
+            return disease;
+        });
         return response.ok({
             status: 'Éxito',
             message: 'Enfermedades obtenidas',
-            data: await this.diseases,
+            data: result,
         });
     }
     async show({ params, response }) {
@@ -28,10 +43,17 @@ class DiseasesController {
                 data: null,
             });
         }
+        const totalCases = disease.cases.length;
+        const deaths = disease.cases.filter((c) => c.is_deaths).length;
+        const { cases, ...disease_data } = disease.toJSON();
         return response.ok({
             status: 'Éxito',
             message: 'Enfermedad obtenida',
-            data: disease,
+            data: {
+                ...disease_data,
+                total_cases: totalCases,
+                deaths: deaths,
+            },
         });
     }
     async store(ctx) {
